@@ -17,19 +17,19 @@ public class PC {
     }
 
     public String getModel() {
-        return model;
+        return this.model;
     }
 
     public Integer getYear() {
-        return year;
+        return this.year;
     }
 
     public String getManufacturer() {
-        return manufacturer;
+        return this.manufacturer;
     }
 
     public Set<String> getComps() {
-        return comps;
+        return this.comps;
     }
 
     public void setModel(String model) {
