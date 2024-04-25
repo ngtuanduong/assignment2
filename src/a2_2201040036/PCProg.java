@@ -111,8 +111,7 @@ public class PCProg {
             String manufacturer = sc.nextLine();
 
             //let user enter components
-
-            String s = "temp";
+            String s = new String("tmp");
             Set<String> comps = new Set<>();
             System.out.println("Adding component process!");
             while(!s.equals("")){

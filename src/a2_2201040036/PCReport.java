@@ -28,13 +28,13 @@ public class PCReport {
         for(int i = 0 ; i < objs.length;i++){
             PC pc = objs[i];
             StringBuilder sb = new StringBuilder();
-            sb.append("["+pc.formattedComps());
+            sb.append("["+pc.reportFormat());
             String comps = sb.toString();
-            if(comps.length() >= 46){
-                 comps= comps.substring(0,42) + "...";
+            if(comps.length() > 50){
+                 comps= comps.substring(0,47) + "...";
             }
             comps+="]";
-            report.append(String.format("%3d %20s %6d %20s %s",(i+1), pc.getModel(), pc.getYear(), pc.getManufacturer(), comps) );
+            report.append(String.format("%3d %20s %6d %15s %s",(i+1), pc.getModel(), pc.getYear(), pc.getManufacturer(), comps) );
             //Move to next line
             report.append("\n");
         }

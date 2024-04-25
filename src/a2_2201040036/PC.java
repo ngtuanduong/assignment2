@@ -61,18 +61,18 @@ public class PC {
     }
 
     public boolean isValidModel(String model) {
-        return model != null && model.length() <= 20;
+        return model != null && !model.isEmpty() && model.length() <= 20;
     }
     public boolean isValidYear(Integer year){
         return year >= 1984;
     }
     public boolean isValidManufacturer(String manufacturer){
-        return manufacturer != null && manufacturer.length() <= 15;
+        return manufacturer != null && !manufacturer.isEmpty() && manufacturer.length() <= 15;
     }
     public boolean isValidComps(Set<String> comps){
         return comps != null;
     }
-    public String formattedComps(){
+    public String reportFormat(){
         StringBuilder sb = new StringBuilder();
         if(!this.getComps().isEmpty()){
             for(int j = 0; j < this.getComps().size();j++){
@@ -88,11 +88,12 @@ public class PC {
 
     @Override
     public String toString() {
-        return "PC<" + model + ", " + year + ", " + manufacturer + ", " + comps.toString() + ">";
+        return String.format("PC<%s, %d, %s, %s>",this.model,this.year,this.manufacturer,this.comps);
     }
 //    @Override
 //    public boolean equals(Object pc){
 //
 //    }
+
 }
 
