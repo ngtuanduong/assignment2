@@ -10,9 +10,13 @@ public class PC {
     private Set<String> comps;
 
     public PC(String model,Integer year,String manufacturer,Set<String> comps){
-        this.model = model;
+        if(!isValidModel(model.trim())) throw new NotPossibleException("Invalid model");
+        if(!isValidYear(year)) throw new NotPossibleException("Invalid year");
+        if(!isValidManufacturer(manufacturer.trim())) throw new NotPossibleException("Invalid manufacturer");
+        if(!isValidComps(comps)) throw new NotPossibleException("Invalid components");
+        this.model = model.trim();
         this.year = year;
-        this.manufacturer = manufacturer;
+        this.manufacturer = manufacturer.trim();
         this.comps = comps;
     }
 
@@ -33,7 +37,7 @@ public class PC {
     }
 
     public void setModel(String model) {
-        if(!isValidModel(model)){
+        if(!isValidModel(model.trim())){
             throw new NotPossibleException("Invalid model!");
         }
         this.model = model.trim();
@@ -47,7 +51,7 @@ public class PC {
     }
 
     public void setManufacturer(String manufacturer) {
-        if(!isValidManufacturer(manufacturer)){
+        if(!isValidManufacturer(manufacturer.trim())){
             throw new NotPossibleException("Invalid manufacturer!");
         }
         this.manufacturer = manufacturer.trim();
@@ -59,15 +63,25 @@ public class PC {
         }
         this.comps = comps;
     }
+    public void addComp(String comp){
+        this.comps.insert(comp);
+    }
+    public void removeComp(String comp){
+        this.comps.remove(comp);
+    }
 
     public boolean isValidModel(String model) {
-        return model != null && !model.isEmpty() && model.length() <= 20;
+        return  model != null &&
+                !model.isEmpty() &&
+                model.length() <= 20;
     }
     public boolean isValidYear(Integer year){
         return year >= 1984;
     }
     public boolean isValidManufacturer(String manufacturer){
-        return manufacturer != null && !manufacturer.isEmpty() && manufacturer.length() <= 15;
+        return  manufacturer != null &&
+                !manufacturer.isEmpty() &&
+                manufacturer.length() <= 15;
     }
     public boolean isValidComps(Set<String> comps){
         return comps != null;
@@ -84,16 +98,19 @@ public class PC {
         }
         return sb.toString();
     }
-
-
     @Override
     public String toString() {
         return String.format("PC<%s, %d, %s, %s>",this.model,this.year,this.manufacturer,this.comps);
     }
-//    @Override
-//    public boolean equals(Object pc){
-//
-//    }
-
+    @Override
+    public boolean equals(Object pc){
+        if (this == pc) return true;
+        if(pc == null || this.getClass() != pc.getClass()) return false;
+        PC p = (PC) pc;
+        return this.getModel().equals(p.getModel()) &&
+                this.year.equals(p.getYear()) &&
+                this.getManufacturer().equals(p.getManufacturer()) &&
+                this.getComps().equals(p.getComps());
+    }
 }
 
