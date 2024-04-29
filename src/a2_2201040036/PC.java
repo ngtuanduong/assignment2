@@ -86,8 +86,11 @@ public class PC {
     public boolean isValidComps(Set<String> comps){
         return comps != null;
     }
-    public String reportFormat(){
+
+    //method for
+    public String compsInReportFormat(){
         StringBuilder sb = new StringBuilder();
+        sb.append("[");
         if(!this.getComps().isEmpty()){
             for(int j = 0; j < this.getComps().size();j++){
                 sb.append(this.getComps().getElements().get(j));
@@ -96,7 +99,11 @@ public class PC {
                 }
             }
         }
-        return sb.toString();
+        String comps = sb.toString();
+        if(comps.length() > 49){
+            comps = comps.substring(0,47) + "...";
+        }
+        return comps+"]";
     }
     @Override
     public String toString() {
@@ -105,10 +112,11 @@ public class PC {
     @Override
     public boolean equals(Object pc){
         if (this == pc) return true;
-        if(pc == null || this.getClass() != pc.getClass()) return false;
+        if(pc == null  || this.getClass() != pc.getClass()) return false;
         PC p = (PC) pc;
-        return this.getModel().equals(p.getModel()) &&
-                this.year.equals(p.getYear()) &&
+        if( this.getComps() != p.getComps()) return false;
+        return  this.getModel().equals(p.getModel()) &&
+                this.getYear().equals(p.getYear()) &&
                 this.getManufacturer().equals(p.getManufacturer()) &&
                 this.getComps().equals(p.getComps());
     }

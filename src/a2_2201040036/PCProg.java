@@ -73,7 +73,7 @@ public class PCProg {
                 // prompt user to save report
                 System.out.println("Save report to file? [Y/N]");
                 String toSave = sc.nextLine();
-                if (toSave.equals("Y")) {
+                if (toSave.equals("Y") ) {
                     prog.saveReport(report);
                     System.out.println("report saved");
                 }
@@ -87,8 +87,8 @@ public class PCProg {
         PCFactory pf = PCFactory.getFactory();
         Scanner sc = new Scanner(System.in);
         /**
-         * if cont = true => create a new PC object
-         * else => end method
+         * if cont = true --> create a new PC object
+         * else --> end method
          */
         boolean cont = true;
         while(cont){
@@ -101,8 +101,8 @@ public class PCProg {
             //let user enter year of manufacture
             System.out.print("Please enter year of manufacture: ");
             Integer year = sc.nextInt();
-
             sc.nextLine();//"delete" newline character creating by hitting "enter" because the nextInt method does not read it
+
             //move to next line
             System.out.println();
 
@@ -111,16 +111,20 @@ public class PCProg {
             String manufacturer = sc.nextLine();
 
             //let user enter components
-            String s = new String("tmp");
+            String s;
             Set<String> comps = new Set<>();
             System.out.println("Adding component process!");
-            while(!s.equals("")){
-                System.out.print("Add component(Type nothing to finish adding component): ");
+            do{
+                System.out.print("Add a new component(Type nothing to finish adding component): ");
                 s = sc.nextLine();
                 if(!s.equals("")) comps.insert(s);
 
-            }
+            }while (!s.equals(""));// end loop when the input is just a blank line
+
+            //Create a new pc by factory with the specifications above
             objs.insert(pf.createPC(model,year,manufacturer,comps));
+
+            //Looping for ensuring true response to continue
             boolean wrongResponse = true;
             while(wrongResponse){
                 System.out.println("Do you want to add another pc?(Y,N)");
@@ -136,11 +140,7 @@ public class PCProg {
                     wrongResponse = true;
                 }
             }
-
-
         }
-
-
     }
 
 }
